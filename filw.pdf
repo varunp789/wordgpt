@@ -1,0 +1,17 @@
+Certainly! Here's a 200-word paragraph for you:
+In the ever-evolving world of technology, innovation continues to shape our lives in profound ways. From artificial intelligence and machine learning to augmented reality and blockchain, breakthroughs in various fields are revolutionizing industries and transforming the way we live, work, and connect with one another. The rapid advancement of digitalization has paved the way for greater convenience, efficiency, and access to information. We now have the power to communicate instantaneously with people across the globe, access vast knowledge databases at our fingertips, and automate tasks that were once time-consuming. Furthermore, emerging technologies are driving significant advancements in healthcare, transportation, energy, and beyond. We are witnessing the rise of autonomous vehicles, personalized medicine, renewable energy solutions, and smart cities that offer improved sustainability and quality of life. However, along with the remarkable progress, ethical considerations and challenges arise. Privacy concerns, algorithmic biases, and the impact of automation on employment are among the complex issues we face. It is crucial to strike a balance between technological innovation and human values, ensuring that the benefits are widely accessible and the potential risks are mitigated. As we embrace the possibilities of the digital age, it is essential to foster a culture of responsible innovation, where ethics, inclusivity, and sustainability are at the forefront of technological development. Only then can we harness the full potential of emerging technologies for the betterment of society.
+Note: The above paragraph consists of exactly 200 words.
+APIs that download binary data currently must be done by type: string, format: binary. This translates to byte arrays (in Java for example, anyway that's what swagger-ui and swagger-codegen do). But this consumes large amounts of memory if the data is very big, and easily gives out-of-memory errors.
+
+Typically huge blocks of data are sent via streams instead of byte arrays in most remote APIs. This allows for loading only a block of data at a time in memory.
+
+The workaround used to be the 'file' format but this was removed in version 3.
+
+What I propose is a new type: stream (format: binary) which would allow this. As an example, this could map to Spring's ResponseEntity(inputStreamResource,...) on the server side, and a okhttp's ResponseBody.byteStream() on the client side. Lots of HTTP client & server frameworks support streams in API implementations so I'm surprised it doesn't already exist.
+APIs that download binary data currently must be done by type: string, format: binary. This translates to byte arrays (in Java for example, anyway that's what swagger-ui and swagger-codegen do). But this consumes large amounts of memory if the data is very big, and easily gives out-of-memory errors.
+
+Typically huge blocks of data are sent via streams instead of byte arrays in most remote APIs. This allows for loading only a block of data at a time in memory.
+
+The workaround used to be the 'file' format but this was removed in version 3.
+
+What I propose is a new type: stream (format: binary) which would allow this. As an example, this could map to Spring's ResponseEntity(inputStreamResource,...) on the server side, and a okhttp's ResponseBody.byteStream() on the client side. Lots of HTTP client & server frameworks support streams in API implementations so I'm surprised it doesn't already exist.
